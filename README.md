@@ -1,4 +1,4 @@
-# php FileCacher
+# php File Cacher
 This class helps you to use cache system in your php projects and develop smart projects with cache
 
 ```
