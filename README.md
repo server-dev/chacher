@@ -1,6 +1,24 @@
 # php FileCacher
 This class helps you to use cache system in your php projects and develop smart projects with cache
 
+```
+FileCacher::put("key", "value");
+FileCacher::put("key", "value", 60);
+
+$data = FileCacher::get("key", function () {
+    return "default value";
+});
+
+$data = FileCacher::remember("key", function () {
+    return "default value";
+}, 60);
+
+FileCacher::pull("key");
+
+FileCacher::forget("key");
+
+FileCacher::has("key");
+```
 
 ## how to use
 you can use this class with composer package manager or include in your php files
