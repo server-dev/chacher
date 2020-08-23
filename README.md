@@ -112,3 +112,8 @@ FileCacher::forget("key");
 ```
 FileCacher::has("key");
 ```
+### clear
+``clear function`` removes all caches
+```
+FileCacher::clear();
+```
