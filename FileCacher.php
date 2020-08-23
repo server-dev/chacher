@@ -74,6 +74,19 @@ class FileCacher
         return !self::_cacheFileExists($file_path);
     }
 
+    public static function clear()
+    {
+        $cache_dir = self::_prepareDirPath(self::$_cache_dir ?: self::_defaultCacheDir());
+        $caches = scandir($cache_dir);
+
+        foreach ($caches as $cache) {
+            if (!self::_strStartsWith($cache, ".")) {
+                unlink($cache_dir . $cache);
+            }
+        }
+        die();
+    }
+
     private static function _putCacheFileContent($file_path, $content)
     {
         return file_put_contents($file_path, $content) !== false;
@@ -98,14 +111,14 @@ class FileCacher
     {
         $cache_dir = self::$_cache_dir ?: self::_defaultCacheDir();
         self::_makeCacheDir(self::$_cache_dir ?: null);
-        return self::_prepareFilePath($cache_dir
-            . (self::_strEndsWith($cache_dir, "/") ? '' : '/') . md5($key));
+        return self::_prepareDirPath($cache_dir) . md5($key);
     }
 
-    private static function _prepareFilePath($file_path)
+    private static function _prepareDirPath($file_path)
     {
         $slash = self::_strStartsWith($file_path, "/") ? "" : "/";
-        return "." . $slash . $file_path;
+        $endSlash = self::_strEndsWith($file_path, "/") ? "" : "/";
+        return "." . $slash . $file_path . $endSlash;
     }
 
     private static function _strStartsWith($str, $value)
