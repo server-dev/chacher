@@ -1,7 +1,6 @@
-<?php 
+<?php
 
-class FileCacher
-{
+class FileCacher {
     public static function put($key, $value, $expire_after = 0)
     {
         $file_path = self::_createFilePathWithKey($key);
